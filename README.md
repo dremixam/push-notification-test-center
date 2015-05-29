@@ -1,4 +1,4 @@
-# push-notification-test-center
+# Push Notification Test Center
 
 Webapp to test push notifications on Android and iOS.
 
