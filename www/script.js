@@ -20,7 +20,7 @@ app.controller('AndroidCtrl', ['$scope', '$http', function ($scope, $http) {
 
   $scope.send = function () {
     $scope.isDisabled = true;
-    $http.post('/postAndroid', $scope.pushValues).
+    $http.post('postAndroid', $scope.pushValues).
     success(function (data, status, headers, config) {
       console.log('succes ' + JSON.stringify(data));
       if (data.status && data.status.success === 1) {
@@ -77,7 +77,7 @@ app.controller('iosCtrl', ['$scope', '$http', function ($scope, $http) {
 
   $scope.send = function () {
     $scope.isDisabled = true;
-    $http.post('/postiOS', $scope.pushValues).
+    $http.post('postiOS', $scope.pushValues).
     success(function (data, status, headers, config) {
       console.log('succes ' + JSON.stringify(data));
       if (data.status && data.status.success === 1) {
