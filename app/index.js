@@ -1,3 +1,4 @@
+var android = require('./android');
 var ios = require('./ios');
 var fs = require('fs');
 
