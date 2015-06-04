@@ -76,11 +76,11 @@
                 <div layout layout-sm="column">
                   <md-input-container flex>
                     <small>Cert file</small>
-                    <input type="file" onchange="angular.element(this).scope().setCertFile(this)">
+                    <input type="file" id="CertFile" onchange="angular.element(this).scope().setCertFile(this)">
                   </md-input-container>
                   <md-input-container flex>
                     <small>Key file</small>
-                    <input type="file" onchange="angular.element(this).scope().setKeyFile(this)">
+                    <input type="file" id="KeyFile" onchange="angular.element(this).scope().setKeyFile(this)">
                   </md-input-container>
                 </div>
 

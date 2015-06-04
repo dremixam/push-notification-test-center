@@ -74,6 +74,9 @@ app.controller('iosCtrl', ['$scope', '$http', function ($scope, $http) {
   $scope.pushValues = JSON.parse(JSON.stringify($scope.defaultValues));
 
   $scope.reset = function () {
+    document.getElementById('CertFile').value = '';
+    document.getElementById('KeyFile').value = '';
+
     $scope.pushValues = JSON.parse(JSON.stringify($scope.defaultValues));
   };
 
@@ -95,4 +98,4 @@ app.controller('iosCtrl', ['$scope', '$http', function ($scope, $http) {
       $scope.message = 'An error occured';
     });
   };
-          }]);
+}]);

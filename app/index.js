@@ -19,7 +19,6 @@ module.exports = function (app) {
           });
         }
       });
-
     } catch (err) {
       console.error(err);
       res.status(400).send({
@@ -33,24 +32,31 @@ module.exports = function (app) {
     console.log('demande de push iOS : ' + JSON.stringify(req.body));
 
     try {
-      ios(req.body.certfile, req.body.keyfile, req.body.gateway, req.body.port, req.body.token, function (err, result) {
-        if (err) {
-          console.error(err);
-          res.status(400).send({
-            'error': err
-          });
-        } else {
-          console.log('seems ok');
-          res.status(200).send({
-            'status': result
-          });
-        }
+      var error = false;
+      ios(req.body.certfile, req.body.keyfile, req.body.gateway, req.body.port, req.body.token, function (e) {
+        error = true;
+        res.status(400).send({
+          'error': e
+        });
       });
     } catch (err) {
+      error = true;
       console.error(err);
       res.status(400).send({
         'error': err
       });
+    } finally {
+      //This is not a good way to manage this, but I didn't find better
+      setTimeout(function () {
+        if (!error) {
+          res.status(200).send({
+            'status': {
+              'success': 1
+            }
+          });
+        }
+      }, 5000);
+
     }
   });
 

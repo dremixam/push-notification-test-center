@@ -8,7 +8,7 @@
   "author": "",
   "license": "WTFPL",
   "dependencies": {
-    "apns": "^0.1.0",
+    "apns": "https://github.com/dremixam/node-apns.git",
     "body-parser": "^1.12.4",
     "express": "^4.12.4",
     "log4js": "^0.6.25",
