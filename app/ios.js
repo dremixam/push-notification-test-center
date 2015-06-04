@@ -1,54 +1,34 @@
-var apn = require('apn'),
+var apns = require('apns'),
   log4js = require('log4js');
 
 var logger = log4js.getLogger('pushios');
 logger.setLevel('DEBUG');
 
-
-var errorHappened = function (errorcode, note) {
-
-}
-
 module.exports = function (certfile, keyfile, gateway, port, token, callback) {
-
-  if (gateway === 'gateway.push.apple.com') {
-    process.env.NODE_ENV = 'production';
-  } else {
-    delete process.env.NODE_ENV;
-  }
-
-
+  'use strict';
   var options = {
-    cert: certfile,
-    key: keyfile,
+    certData: certfile,
+    keyData: keyfile,
     gateway: gateway,
     port: parseInt(port),
-    enhanced: true,
     errorCallback: function (errorcode, note) {
       callback(errorcode, note);
     },
-    cacheLength: 10,
-    batchFeedback: true,
+    debug: true
   };
-  var apnConnection = new apn.Connection(options);
 
-  var feedback = new apn.Feedback(options);
-  feedback.on("feedback", function (devices) {
-    devices.forEach(function (item) {
-      callback(null, item);
-    });
-  });
+  logger.debug('les parametres pour ce qu\'on va envoyer' + JSON.stringify(options));
 
+  var connection = new apns.Connection(options);
 
-
-  var myDevice = new apn.Device(token);
-  var note = new apn.Notification();
-  note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
-  note.badge = 3;
-  note.sound = "ping.aiff";
-  note.alert = "\uD83D\uDCE7 \u2709 Test";
-  note.payload = {
-    'messageFrom': 'Push notification test center'
+  var notification = new apns.Notification();
+  notification.payload = {
+    'description': 'A good news !'
   };
-  apnConnection.pushNotification(note, myDevice);
-}
+  notification.badge = 1;
+  notification.sound = 'ping.aiff';
+  notification.alert = 'Hello World !';
+  notification.device = new apns.Device(token);
+
+  connection.sendNotification(notification);
+};

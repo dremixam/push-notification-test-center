@@ -13,7 +13,7 @@ var log = log4js.getLogger('index.js');
 var express = require('express'); // load express
 var app = express(); // create express app
 var server = require('http').createServer(app); // create webserver
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 
 app.use(log4js.connectLogger(log, {
   level: 'auto'

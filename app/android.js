@@ -1,12 +1,11 @@
-var apn = require('apn'),
-  gcm = require('node-gcm'),
+var gcm = require('node-gcm'),
   log4js = require('log4js');
 
 var logger = log4js.getLogger('push');
 logger.setLevel('DEBUG');
 
 module.exports = function (APIKey, regIds, collapseKey, delayWhileIdle, ttl, callback) {
-  var message = new gcm.Message();
+  'use strict';
 
   var message = new gcm.Message({
     collapseKey: collapseKey,
@@ -22,4 +21,4 @@ module.exports = function (APIKey, regIds, collapseKey, delayWhileIdle, ttl, cal
   sender.send(message, regIds, function (err, result) {
     callback(err, result);
   });
-}
+};
