@@ -7,6 +7,14 @@ logger.setLevel('DEBUG');
 module.exports = function (certfile, keyfile, gateway, port, token, errorCallback) {
   'use strict';
 
+  if (!certfile || !keyfile || !gateway || !port || !token) {
+    errorCallback({
+      'code': -200,
+      'note': 'missing data'
+    });
+    return;
+  }
+
   var options = {
     certData: certfile,
     keyData: keyfile,
